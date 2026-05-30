@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ===== SEO Meta ===== -->
+  <title>NovaMind AI - 企业级AI智能解决方案 | 商业决策智能化平台</title>
+  <meta name="description" content="NovaMind AI 企业级人工智能解决方案，提供大模型私有化部署、智能风控、医疗影像AI诊断、工业视觉质检、供应链优化等一站式AI服务，助力企业实现商业决策智能化升级。" />
+  <meta name="keywords" content="AI解决方案,企业人工智能,大模型部署,智能风控,知识图谱,机器学习,商业智能,NovaMind" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="NovaMind AI" />
+  <meta name="theme-color" content="#0e1015" />
+  <link rel="canonical" href="https://novamind-ai.com" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="NovaMind AI - 企业级AI智能解决方案" />
+  <meta property="og:description" content="将深度学习、知识图谱与行业know-how深度融合，助力企业实现从数据洞察到智能决策的完整闭环。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://novamind-ai.com" />
+  <meta property="og:locale" content="zh_CN" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="NovaMind AI - 企业级AI智能解决方案" />
+  <meta name="twitter:description" content="企业级人工智能解决方案，助力企业实现商业决策智能化升级。" />
+
+  <!-- ===== Tailwind CSS v3 CDN ===== -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            nova: {
+              deep:  '#0e1015',
+              dark:  '#161920',
+              card:  '#1c2029',
+              hover: '#222733',
+              elev:  '#282d3a',
+              cyan:  '#00d4aa',
+              blue:  '#4a9eff',
+              muted: '#6b7280',
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+          },
+          animation: {
+            'spin-slow':  'spin 30s linear infinite',
+            'spin-rev':   'spin 24s linear infinite reverse',
+            'spin-fast':  'spin 18s linear infinite',
+            'pulse-dot':  'pulse-dot 2s infinite',
+            'fade-in-up': 'fadeInUp 0.7s ease forwards',
+          },
+          keyframes: {
+            'pulse-dot': { '0%, 100%': { opacity: '1' }, '50%': { opacity: '0.3' } },
+            'fadeInUp':  { '0%': { opacity: '0', transform: 'translateY(40px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    /* ===== Minimal custom CSS for animations & complex selectors ===== */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:#0e1015;color:#c8ccd4;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    a{text-decoration:none;color:inherit}
+    ul{list-style:none}
+
+    /* Three.js canvas */
+    #hero-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+
+    /* Nav link underline */
+    .nav-link::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%) scaleX(0);width:60%;height:2px;background:var(--tw-shadow-color,#00d4aa);border-radius:1px;transition:transform 0.3s}
+    .nav-link:hover::after{transform:translateX(-50%) scaleX(1)}
+
+    /* Hero rings */
+    .hero-ring{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,0.06)}
+    .hero-ring .dot{position:absolute;width:8px;height:8px;border-radius:50%;background:#00d4aa;box-shadow:0 0 12px rgba(0,212,170,0.15)}
+    .hero-ring:nth-child(1){width:100%;height:100%;animation:spin 30s linear infinite}
+    .hero-ring:nth-child(1) .dot{top:-4px;left:50%;transform:translateX(-50%)}
+    .hero-ring:nth-child(2){width:75%;height:75%;animation:spin 24s linear infinite reverse}
+    .hero-ring:nth-child(2) .dot{top:50%;right:-4px;transform:translateY(-50%);background:#4a9eff;box-shadow:0 0 12px rgba(74,158,255,0.3)}
+    .hero-ring:nth-child(3){width:50%;height:50%;animation:spin 18s linear infinite}
+    .hero-ring:nth-child(3) .dot{bottom:-4px;left:50%;transform:translateX(-50%)}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* Feature card top gradient line */
+    .feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#00d4aa,transparent);opacity:0;transition:opacity 0.35s}
+    .feature-card:hover::before{opacity:1}
+
+    /* Solution card bg gradient overlay */
+    .solution-card .card-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,#1c2029 100%)}
+
+    /* Carousel */
+    .cases-track{display:flex;transition:transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);gap:1.5rem}
+    .case-card{min-width:calc(33.333% - 1rem);flex-shrink:0}
+    @media(max-width:1024px){.case-card{min-width:calc(50% - 0.75rem)}}
+    @media(max-width:768px){.case-card{min-width:calc(100% - 0rem)}}
+
+    /* Scroll reveal */
+    .reveal{opacity:0;transform:translateY(40px);transition:opacity 0.7s ease,transform 0.7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    /* Tech progress bar */
+    .tech-bar{height:3px;border-radius:2px;background:#282d3a;overflow:hidden}
+    .tech-bar span{display:block;height:100%;border-radius:2px;background:linear-gradient(90deg,#00d4aa,#4a9eff);width:0;transition:width 1.2s cubic-bezier(0.25,0.46,0.45,0.94)}
+
+    /* Custom scrollbar */
+    ::selection{background:rgba(0,212,170,0.15);color:#00d4aa}
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-track{background:#0e1015}
+    ::-webkit-scrollbar-thumb{background:#282d3a;border-radius:3px}
+    ::-webkit-scrollbar-thumb:hover{background:#6b7280}
+  </style>
+</head>
+<body class="font-sans text-[#c8ccd4] bg-nova-deep antialiased">
+
+  <!-- ===== Navbar ===== -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-8 bg-nova-deep/85 backdrop-blur-xl border-b border-white/[0.06] transition-all duration-350">
+    <div class="max-w-[1280px] mx-auto flex items-center justify-between h-16 px-0">
+      <a href="#hero" class="text-lg font-bold text-[#e8eaed] flex items-center gap-2">
+        Nova<span class="text-nova-cyan">Mind</span>
+      </a>
+      <div class="flex items-center gap-1">
+        <a href="#hero" class="nav-link hidden sm:inline-block px-3 py-2 text-sm font-medium text-[#9ca3af] hover:text-[#e8eaed] rounded-md transition-all duration-350 relative">首页</a>
+        <a href="#solutions" class="nav-link hidden sm:inline-block px-3 py-2 text-sm font-medium text-[#9ca3af] hover:text-[#e8eaed] rounded-md transition-all duration-350 relative">解决方案</a>
+        <a href="#features" class="nav-link hidden sm:inline-block px-3 py-2 text-sm font-medium text-[#9ca3af] hover:text-[#e8eaed] rounded-md transition-all duration-350 relative">产品功能</a>
+        <a href="#cases" class="nav-link hidden sm:inline-block px-3 py-2 text-sm font-medium text-[#9ca3af] hover:text-[#e8eaed] rounded-md transition-all duration-350 relative">案例展示</a>
+        <a href="#tech" class="nav-link hidden sm:inline-block px-3 py-2 text-sm font-medium text-[#9ca3af] hover:text-[#e8eaed] rounded-md transition-all duration-350 relative">技术优势</a>
+        <a href="#contact" class="ml-3 px-4 py-2 text-sm font-semibold text-nova-deep bg-nova-cyan hover:bg-[#00e8bc] hover:shadow-[0_0_24px_rgba(0,212,170,0.15)] rounded-md transition-all duration-350 -translate-y-0 hover:-translate-y-0.5">合作咨询</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== Hero ===== -->
+  <section id="hero" class="relative min-h-screen flex items-center overflow-hidden bg-nova-deep pt-16">
+    <canvas id="hero-canvas"></canvas>
+    <div class="absolute inset-0 pointer-events-none"
+         style="background:radial-gradient(ellipse 60% 50% at 30% 50%,rgba(0,212,170,0.06),transparent),
+                       radial-gradient(ellipse 40% 40% at 80% 30%,rgba(74,158,255,0.05),transparent),
+                       radial-gradient(ellipse 50% 60% at 50% 100%,rgba(0,212,170,0.03),transparent)"></div>
+    <div class="relative z-10 w-full max-w-[1280px] mx-auto px-4 sm:px-8 grid lg:grid-cols-2 gap-8 lg:gap-16 items-center pt-4 lg:pt-8">
+      <!-- Hero Text -->
+      <div>
+        <div class="inline-flex items-center gap-2 bg-nova-cyan/10 border border-nova-cyan/20 px-3 py-1.5 rounded-full text-sm font-medium text-nova-cyan mb-8">
+          <span class="w-1.5 h-1.5 rounded-full bg-nova-cyan animate-pulse-dot"></span>
+          新一代企业智能平台
+        </div>
+        <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-semibold text-[#e8eaed] leading-tight tracking-tight mb-4">
+          以 AI 驱动<br>
+          <span class="bg-gradient-to-r from-nova-cyan to-nova-blue bg-clip-text text-transparent">商业决策智能化</span>
+        </h1>
+        <p class="text-lg text-[#9ca3af] max-w-[520px] mb-10">NovaMind 企业级人工智能解决方案，将深度学习、知识图谱与行业know-how深度融合，助力企业实现从数据洞察到智能决策的完整闭环。</p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#contact" class="inline-flex items-center gap-2 bg-nova-cyan text-nova-deep font-semibold px-8 py-3 rounded-md text-[0.95rem] transition-all duration-350 hover:bg-[#00e8bc] hover:shadow-[0_0_32px_rgba(0,212,170,0.15)] hover:-translate-y-0.5">预约演示 →</a>
+          <a href="#features" class="inline-flex items-center gap-2 bg-transparent text-[#e8eaed] font-medium px-8 py-3 rounded-md text-[0.95rem] border border-white/[0.12] transition-all duration-350 hover:bg-nova-card hover:border-[#6b7280]">了解更多</a>
+        </div>
+        <!-- Stats -->
+        <div class="grid grid-cols-3 gap-4 sm:gap-6 mt-12 pt-8 border-t border-white/[0.06]">
+          <div><span class="stat-num block text-xl sm:text-2xl font-bold text-[#e8eaed]" data-target="500">0</span><span class="text-xs sm:text-sm text-[#6b7280] mt-0.5 block">服务企业数</span></div>
+          <div><span class="stat-num block text-xl sm:text-2xl font-bold text-[#e8eaed]" data-target="97">0</span><span class="text-xs sm:text-sm text-[#6b7280] mt-0.5 block">客户续约率 %</span></div>
+          <div><span class="stat-num plus block text-xl sm:text-2xl font-bold text-[#e8eaed]" data-target="300">0</span><span class="text-xs sm:text-sm text-[#6b7280] mt-0.5 block">专利技术数</span></div>
+        </div>
+      </div>
+      <!-- Hero Visual -->
+      <div class="hidden lg:flex items-center justify-center min-h-[400px]">
+        <div class="w-full max-w-[480px] aspect-square relative flex items-center justify-center">
+          <div class="hero-ring"><span class="dot"></span></div>
+          <div class="hero-ring"><span class="dot"></span></div>
+          <div class="hero-ring"><span class="dot"></span></div>
+          <div class="w-20 h-20 rounded-full flex items-center justify-center text-3xl z-10 backdrop-blur-sm"
+               style="background:radial-gradient(circle at 30% 30%,rgba(0,212,170,0.2),rgba(0,212,170,0.05));border:1px solid rgba(0,212,170,0.2)">✦</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Features ===== -->
+  <section id="features" class="py-16 sm:py-24 bg-nova-dark">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-8">
+      <div class="text-center max-w-[680px] mx-auto mb-12 sm:mb-16 reveal">
+        <span class="inline-block text-xs font-semibold tracking-widest uppercase text-nova-cyan mb-4">核心功能</span>
+        <h2 class="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold text-[#e8eaed] leading-tight tracking-tight mb-3">全栈智能 · 赋能业务增长</h2>
+        <p class="text-lg text-[#9ca3af]">六大核心模块覆盖AI应用全生命周期，从数据处理到决策输出，为企业提供一站式智能升级方案。</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <!-- Card 1 -->
+        <div class="feature-card relative bg-nova-card border border-white/[0.06] rounded-xl p-8 sm:p-10 transition-all duration-350 cursor-default hover:bg-nova-hover hover:border-white/[0.12] hover:-translate-y-1 hover:shadow-[0_4px_24px_rgba(0,0,0,0.3),0_1px_4px_rgba(0,0,0,0.2)] overflow-hidden reveal reveal-delay-1">
+          <div class="w-12 h-12 rounded-lg bg-nova-cyan/10 flex items-center justify-center text-lg text-nova-cyan mb-5">◈</div>
+          <span class="inline-block text-[0.7rem] font-semibold tracking-wider uppercase text-nova-cyan mb-4">数据智能</span>
+          <h3 class="text-lg font-semibold text-[#e8eaed] mb-2">多源数据融合引擎</h3>
+          <p class="text-sm text-[#9ca3af] leading-relaxed">毫秒级接入结构化与非结构化数据，自动完成清洗、标注与特征工程。</p>
+        </div>
+        <!-- Card 2 -->
+        <div class="feature-card relative bg-nova-card border border-white/[0.06] rounded-xl p-8 sm:p-10 transition-all duration-350 cursor-default hover:bg-nova-hover hover:border-white/[0.12] hover:-translate-y-1 hover:shadow-[0_4px_24px_rgba(0,0,0,0.3),0_1px_4px_rgba(0,0,0,0.2)] overflow-hidden reveal reveal-delay-2">
+          <div class="w-12 h-12 rounded-lg bg-nova-cyan/10 flex items-center justify-center text-lg text-nova-cyan mb-5">◇</div>
+          <span class="inline-block text-[0.7rem] font-semibold tracking-wider uppercase text-nova-cyan mb-4">模型服务</span>
+          <h3 class="text-lg font-semibold text-[#e8eaed] mb-2">大模型推理平台</h3>
+          <p class="text-sm text-[#9ca3af] leading-relaxed">私有化部署LLM与多模态模型，端到端加密，确保企业数据安全合规。</p>
+        </div>
+        <!-- Card 3 -->
+        <div class="feature-card relative bg-nova-card border border-white/[0.06] rounded-xl p-8 sm:p-10 transition-all duration-350 cursor-default hover:bg-nova-hover hover:border-white/[0.12] hover:-translate-y-1 hover:shadow-[0_4px_24px_rgba(0,0,0,0.3),0_1px_4px_rgba(0,0,0,0.2)] overflow-hidden reveal reveal-delay-3">
+          <div class="w-12 h-12 rounded-lg bg-nova-cyan/10 flex items-center justify-center text-lg text-nova-cyan mb-5">○</div>
+          <span class="inline-block text-[0.7rem] font-semibold tracking-wider uppercase text-nova-cyan mb-4">知识管理</span>
+          <h3 class="text-lg font-semibold text-[#e8eaed] mb-2">行业知识图谱</h3>
+          <p class="text-sm text-[#9ca3af] leading-relaxed">深度挖掘业务关联，构建领域专用知识图谱，让AI真正理解行业逻辑。</p>
+        </div>
+        <!-- Card 4 -->
+        <div class="feature-card relative bg-nova-card border border-white/[0.06] rounded-xl p-8 sm:p-10 transition-all duration-350 cursor-default hover:bg-nova-hover hover:border-white/[0.12] hover:-translate-y-1 hover:shadow-[0_4px_24px_rgba(0,0,0,0.3),0_1px_4px_rgba(0,0,0,0.2)] overflow-hidden reveal reveal-delay-1">
+          <div class="w-12 h-12 rounded-lg bg-nova-cyan/10 flex items-center justify-center text-lg text-nova-cyan mb-5">△</div>
+          <span class="inline-block text-[0.7rem] font-semibold tracking-wider uppercase text-nova-cyan mb-4">决策智能</span>
+          <h3 class="text-lg font-semibold text-[#e8eaed] mb-2">智能决策中枢</h3>
+          <p class="text-sm text-[#9ca3af] leading-relaxed">基于强化学习与因果推断，提供可解释的决策建议与模拟推演能力。</p>
+        </div>
+        <!-- Card 5 -->
+        <div class="feature-card relative bg-nova-card border border-white/[0.06] rounded-xl p-8 sm:p-10 transition-all duration-350 cursor-default hover:bg-nova-hover hover:border-white/[0.12] hover:-translate-y-1 hover:shadow-[0_4px_24px_rgba(0,0,0,0.3),0_1px_4px_rgba(0,0,0,0.2)] overflow-hidden reveal reveal-delay-2">
+          <div class="w-12 h-12 rounded-lg bg-nova-cyan/10 flex items-center justify-center text-lg text-nova-cyan mb-5">▽</div>
+          <span class="inline-block text-[0.7rem] font-semibold tracking-wider uppercase text-nova-cyan mb-4">自动化</span>
+          <h3 class="text-lg font-semibold text-[#e8eaed] mb-2">业务流程自动化</h3>
+          <p class="text-sm text-[#9ca3af] leading-relaxed">RPA+AI融合，自动化处理重复性业务流程，释放高价值人力资源。</p>
+        </div>
+        <!-- Card 6 -->
+        <div class="feature-card relative bg-nova-card border border-white/[0.06] rounded-xl p-8 sm:p-10 transition-all duration-350 cursor-default hover:bg-nova-hover hover:border-white/[0.12] hover:-translate-y-1 hover:shadow-[0_4px_24px_rgba(0,0,0,0.3),0_1px_4px_rgba(0,0,0,0.2)] overflow-hidden reveal reveal-delay-3">
+          <div class="w-12 h-12 rounded-lg bg-nova-cyan/10 flex items-center justify-center text-lg text-nova-cyan mb-5">□</div>
+          <span class="inline-block text-[0.7rem] font-semibold tracking-wider uppercase text-nova-cyan mb-4">监控</span>
+          <h3 class="text-lg font-semibold text-[#e8eaed] mb-2">AI运维监控台</h3>
+          <p class="text-sm text-[#9ca3af] leading-relaxed">全链路模型监控与漂移检测，保障生产环境AI服务持续稳定可靠。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Solutions ===== -->
+  <section id="solutions" class="py-16 sm:py-24 bg-nova-deep">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-8">
+      <div class="text-center max-w-[680px] mx-auto mb-12 sm:mb-16 reveal">
+        <span class="inline-block text-xs font-semibold tracking-widest uppercase text-nova-cyan mb-4">行业解决方案</span>
+        <h2 class="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold text-[#e8eaed] leading-tight tracking-tight mb-3">深耕行业 · 定制化智能落地</h2>
+        <p class="text-lg text-[#9ca3af]">针对不同行业核心痛点的AI解决方案，已在金融、医疗、制造、零售等领域落地验证。</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4 sm:gap-6">
+        <div class="solution-card rounded-xl overflow-hidden bg-nova-card border border-white/[0.06] transition-all duration-350 cursor-default flex flex-col hover:border-white/[0.12] hover:-translate-y-1 hover:shadow-[0_4px_24px_rgba(0,0,0,0.3)] reveal reveal-delay-1">
+          <div class="h-[140px] flex items-center justify-center relative overflow-hidden" style="background:linear-gradient(135deg,rgba(0,212,170,0.08),rgba(0,212,170,0.02))"><span class="text-5xl opacity-[0.08] absolute">₿</span></div>
+          <div class="p-6 sm:p-8 flex-1 flex flex-col">
+            <h3 class="text-lg font-semibold text-[#e8eaed] mb-2">金融风控智能体</h3>
+            <p class="text-sm text-[#9ca3af] leading-relaxed flex-1 mb-5">实时交易反欺诈、信用评估模型、智能合规审查，降低坏账率42%，提升审批效率6倍。</p>
+            <div class="flex gap-2 flex-wrap"><span class="text-xs px-2.5 py-1 rounded-full bg-nova-cyan/10 text-nova-cyan font-medium">反欺诈</span><span class="text-xs px-2.5 py-1 rounded-full bg-nova-cyan/10 text-nova-cyan font-medium">信用评分</span><span class="text-xs px-2.5 py-1 rounded-full bg-nova-cyan/10 text-nova-cyan font-medium">智能合规</span></div>
+          </div>
+        </div>
+        <div class="solution-card rounded-xl overflow-hidden bg-nova-card border border-white/[0.06] transition-all duration-350 cursor-default flex flex-col hover:border-white/[0.12] hover:-translate-y-1 hover:shadow-[0_4px_24px_rgba(0,0,0,0.3)] reveal reveal-delay-2">
+          <div class="h-[140px] flex items-center justify-center relative overflow-hidden" style="background:linear-gradient(135deg,rgba(74,158,255,0.08),rgba(74,158,255,0.02))"><span class="text-5xl opacity-[0.08] absolute">⚕</span></div>
+          <div class="p-6 sm:p-8 flex-1 flex flex-col">
+            <h3 class="text-lg font-semibold text-[#e8eaed] mb-2">医疗影像辅助诊断</h3>
+            <p class="text-sm text-[#9ca3af] leading-relaxed flex-1 mb-5">基于深度学习的医学影像分析系统，覆盖CT、MRI、X光多模态，辅助诊断准确率98.7%。</p>
+            <div class="flex gap-2 flex-wrap"><span class="text-xs px-2.5 py-1 rounded-full bg-nova-cyan/10 text-nova-cyan font-medium">影像分析</span><span class="text-xs px-2.5 py-1 rounded-full bg-nova-cyan/10 text-nova-cyan font-medium">辅助诊断</span><span class="text-xs px-2.5 py-1 rounded-full bg-nova-cyan/10 text-nova-cyan font-medium">病理筛查</span></div>
+          </div>
+        </div>
+        <div class="solution-card rounded-xl overflow-hidden bg-nova-card border border-white/[0.06] transition-all duration-350 cursor-default flex flex-col hover:border-white/[0.12] hover:-translate-y-1 hover:shadow-[0_4px_24px_rgba(0,0,0,0.3)] reveal reveal-delay-3">
+          <div class="h-[140px] flex items-center justify-center relative overflow-hidden" style="background:linear-gradient(135deg,rgba(0,212,170,0.06),rgba(0,212,170,0.01))"><span class="text-5xl opacity-[0.08] absolute">⚙</span></div>
+          <div class="p-6 sm:p-8 flex-1 flex flex-col">
+            <h3 class="text-lg font-semibold text-[#e8eaed] mb-2">工业质检视觉系统</h3>
+            <p class="text-sm text-[#9ca3af] leading-relaxed flex-1 mb-5">边缘端部署的工业视觉AI，毫秒级缺陷检测，准确率超99.5%，降低人力检测成本70%。</p>
+            <div class="flex gap-2 flex-wrap"><span class="text-xs px-2.5 py-1 rounded-full bg-nova-cyan/10 text-nova-cyan font-medium">缺陷检测</span><span class="text-xs px-2.5 py-1 rounded-full bg-nova-cyan/10 text-nova-cyan font-medium">边缘计算</span><span class="text-xs px-2.5 py-1 rounded-full bg-nova-cyan/10 text-nova-cyan font-medium">实时监控</span></div>
+          </div>
+        </div>
+        <div class="solution-card rounded-xl overflow-hidden bg-nova-card border border-white/[0.06] transition-all duration-350 cursor-default flex flex-col hover:border-white/[0.12] hover:-translate-y-1 hover:shadow-[0_4px_24px_rgba(0,0,0,0.3)] reveal reveal-delay-4">
+          <div class="h-[140px] flex items-center justify-center relative overflow-hidden" style="background:linear-gradient(135deg,rgba(74,158,255,0.06),rgba(74,158,255,0.01))"><span class="text-5xl opacity-[0.08] absolute">🛒</span></div>
+          <div class="p-6 sm:p-8 flex-1 flex flex-col">
+            <h3 class="text-lg font-semibold text-[#e8eaed] mb-2">零售智慧供应链</h3>
+            <p class="text-sm text-[#9ca3af] leading-relaxed flex-1 mb-5">需求预测+智能补货+动态定价一体化，库存周转率提升35%，缺货率下降52%。</p>
+            <div class="flex gap-2 flex-wrap"><span class="text-xs px-2.5 py-1 rounded-full bg-nova-cyan/10 text-nova-cyan font-medium">需求预测</span><span class="text-xs px-2.5 py-1 rounded-full bg-nova-cyan/10 text-nova-cyan font-medium">智能补货</span><span class="text-xs px-2.5 py-1 rounded-full bg-nova-cyan/10 text-nova-cyan font-medium">动态定价</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Cases ===== -->
+  <section id="cases" class="py-16 sm:py-24 bg-nova-dark overflow-hidden">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-8">
+      <div class="text-center max-w-[680px] mx-auto mb-12 sm:mb-16 reveal">
+        <span class="inline-block text-xs font-semibold tracking-widest uppercase text-nova-cyan mb-4">客户案例</span>
+        <h2 class="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold text-[#e8eaed] leading-tight tracking-tight mb-3">行业标杆 · 实效见证</h2>
+        <p class="text-lg text-[#9ca3af]">来自各行业领先企业的真实反馈，见证NovaMind AI带来的业务价值跃升。</p>
+      </div>
+      <div class="relative overflow-hidden -mx-3" id="casesCarousel">
+        <div class="cases-track" id="casesTrack">
+          <div class="case-card bg-nova-card border border-white/[0.06] rounded-xl p-8 sm:p-10 transition-all duration-350 cursor-default flex flex-col hover:bg-nova-hover hover:border-white/[0.12] hover:shadow-[0_4px_24px_rgba(0,0,0,0.3)]">
+            <div class="text-sm leading-relaxed text-[#9ca3af] flex-1 italic mb-7"><span class="block text-3xl text-nova-cyan font-bold leading-none not-italic mb-0">"</span>NovaMind的智能风控系统上线以来，我们的欺诈损失下降了67%，模型响应速度从秒级提升到毫秒级，真正做到了实时拦截。</div>
+            <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-gradient-to-br from-nova-cyan to-nova-blue flex items-center justify-center font-semibold text-sm text-nova-deep shrink-0">陈</div><div><span class="block text-sm font-semibold text-[#e8eaed]">陈明远</span><span class="block text-xs text-[#6b7280] mt-0.5">风控总监 · 兴业金融</span></div></div>
+            <div class="inline-flex items-center gap-1 text-sm font-semibold text-nova-cyan mt-5">↑ 欺诈损失降低 67%</div>
+          </div>
+          <div class="case-card bg-nova-card border border-white/[0.06] rounded-xl p-8 sm:p-10 transition-all duration-350 cursor-default flex flex-col hover:bg-nova-hover hover:border-white/[0.12] hover:shadow-[0_4px_24px_rgba(0,0,0,0.3)]">
+            <div class="text-sm leading-relaxed text-[#9ca3af] flex-1 italic mb-7"><span class="block text-3xl text-nova-cyan font-bold leading-none not-italic mb-0">"</span>医疗影像AI辅助系统帮助我们的放射科医生将阅片效率提升了4倍，早期病变检出率提高了35%，改变了传统的诊断工作流。</div>
+            <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-gradient-to-br from-nova-cyan to-nova-blue flex items-center justify-center font-semibold text-sm text-nova-deep shrink-0">李</div><div><span class="block text-sm font-semibold text-[#e8eaed]">李文静</span><span class="block text-xs text-[#6b7280] mt-0.5">副院长 · 仁和医疗集团</span></div></div>
+            <div class="inline-flex items-center gap-1 text-sm font-semibold text-nova-cyan mt-5">↑ 阅片效率提升 4×</div>
+          </div>
+          <div class="case-card bg-nova-card border border-white/[0.06] rounded-xl p-8 sm:p-10 transition-all duration-350 cursor-default flex flex-col hover:bg-nova-hover hover:border-white/[0.12] hover:shadow-[0_4px_24px_rgba(0,0,0,0.3)]">
+            <div class="text-sm leading-relaxed text-[#9ca3af] flex-1 italic mb-7"><span class="block text-3xl text-nova-cyan font-bold leading-none not-italic mb-0">"</span>工业质检系统上线后，我们的产线缺陷漏检率从3.2%降至0.08%，每年节约质检人力成本超过800万元。</div>
+            <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-gradient-to-br from-nova-cyan to-nova-blue flex items-center justify-center font-semibold text-sm text-nova-deep shrink-0">王</div><div><span class="block text-sm font-semibold text-[#e8eaed]">王建国</span><span class="block text-xs text-[#6b7280] mt-0.5">生产总监 · 精工智造</span></div></div>
+            <div class="inline-flex items-center gap-1 text-sm font-semibold text-nova-cyan mt-5">↑ 缺陷漏检率降至 0.08%</div>
+          </div>
+          <div class="case-card bg-nova-card border border-white/[0.06] rounded-xl p-8 sm:p-10 transition-all duration-350 cursor-default flex flex-col hover:bg-nova-hover hover:border-white/[0.12] hover:shadow-[0_4px_24px_rgba(0,0,0,0.3)]">
+            <div class="text-sm leading-relaxed text-[#9ca3af] flex-1 italic mb-7"><span class="block text-3xl text-nova-cyan font-bold leading-none not-italic mb-0">"</span>供应链智能系统让我们在大促期间的库存周转天数缩短了40%，缺货率降低了52%，这是过去三年最好的运营数据。</div>
+            <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-gradient-to-br from-nova-cyan to-nova-blue flex items-center justify-center font-semibold text-sm text-nova-deep shrink-0">张</div><div><span class="block text-sm font-semibold text-[#e8eaed]">张雅婷</span><span class="block text-xs text-[#6b7280] mt-0.5">供应链VP · 悦享零售</span></div></div>
+            <div class="inline-flex items-center gap-1 text-sm font-semibold text-nova-cyan mt-5">↑ 库存周转提升 40%</div>
+          </div>
+          <div class="case-card bg-nova-card border border-white/[0.06] rounded-xl p-8 sm:p-10 transition-all duration-350 cursor-default flex flex-col hover:bg-nova-hover hover:border-white/[0.12] hover:shadow-[0_4px_24px_rgba(0,0,0,0.3)]">
+            <div class="text-sm leading-relaxed text-[#9ca3af] flex-1 italic mb-7"><span class="block text-3xl text-nova-cyan font-bold leading-none not-italic mb-0">"</span>知识图谱平台将我们内部跨部门的查询响应时间从数天缩短到分钟级，员工自助获取信息的效率提升了12倍。</div>
+            <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-gradient-to-br from-nova-cyan to-nova-blue flex items-center justify-center font-semibold text-sm text-nova-deep shrink-0">赵</div><div><span class="block text-sm font-semibold text-[#e8eaed]">赵思远</span><span class="block text-xs text-[#6b7280] mt-0.5">CIO · 华远集团</span></div></div>
+            <div class="inline-flex items-center gap-1 text-sm font-semibold text-nova-cyan mt-5">↑ 信息检索效率 12×</div>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center items-center gap-3 mt-10">
+        <button id="carouselPrev" class="w-10 h-10 rounded-full border border-white/[0.06] bg-nova-card text-[#9ca3af] flex items-center justify-center transition-all duration-350 cursor-pointer hover:bg-nova-hover hover:border-nova-cyan hover:text-nova-cyan text-lg">‹</button>
+        <div class="flex items-center gap-1.5" id="carouselDots"></div>
+        <button id="carouselNext" class="w-10 h-10 rounded-full border border-white/[0.06] bg-nova-card text-[#9ca3af] flex items-center justify-center transition-all duration-350 cursor-pointer hover:bg-nova-hover hover:border-nova-cyan hover:text-nova-cyan text-lg">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Tech ===== -->
+  <section id="tech" class="py-16 sm:py-24 bg-nova-deep">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-8">
+      <div class="text-center max-w-[680px] mx-auto mb-12 sm:mb-16 reveal">
+        <span class="inline-block text-xs font-semibold tracking-widest uppercase text-nova-cyan mb-4">技术优势</span>
+        <h2 class="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold text-[#e8eaed] leading-tight tracking-tight mb-3">硬核技术 · 构筑竞争壁垒</h2>
+        <p class="text-lg text-[#9ca3af]">十年技术积累，多项核心专利，打造企业级AI基础设施的绝对优势。</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div class="text-center p-8 sm:p-10 bg-nova-card border border-white/[0.06] rounded-xl transition-all duration-350 cursor-default hover:-translate-y-1.5 hover:border-white/[0.12] hover:shadow-[0_4px_24px_rgba(0,0,0,0.3)] reveal reveal-delay-1">
+          <div class="text-4xl font-bold bg-gradient-to-r from-nova-cyan to-nova-blue bg-clip-text text-transparent leading-none mb-2">99.9%</div>
+          <h3 class="text-base font-semibold text-[#e8eaed] mb-2">系统可用性</h3>
+          <p class="text-sm text-[#9ca3af]">分布式架构设计，多活部署，保障企业级服务持续稳定运行</p>
+          <div class="tech-bar mt-5"><span data-width="99.9"></span></div>
+        </div>
+        <div class="text-center p-8 sm:p-10 bg-nova-card border border-white/[0.06] rounded-xl transition-all duration-350 cursor-default hover:-translate-y-1.5 hover:border-white/[0.12] hover:shadow-[0_4px_24px_rgba(0,0,0,0.3)] reveal reveal-delay-2">
+          <div class="text-4xl font-bold bg-gradient-to-r from-nova-cyan to-nova-blue bg-clip-text text-transparent leading-none mb-2">&lt;50ms</div>
+          <h3 class="text-base font-semibold text-[#e8eaed] mb-2">推理延迟</h3>
+          <p class="text-sm text-[#9ca3af]">模型推理引擎端到端延迟低于50ms，满足实时业务响应需求</p>
+          <div class="tech-bar mt-5"><span data-width="90"></span></div>
+        </div>
+        <div class="text-center p-8 sm:p-10 bg-nova-card border border-white/[0.06] rounded-xl transition-all duration-350 cursor-default hover:-translate-y-1.5 hover:border-white/[0.12] hover:shadow-[0_4px_24px_rgba(0,0,0,0.3)] reveal reveal-delay-3">
+          <div class="text-4xl font-bold bg-gradient-to-r from-nova-cyan to-nova-blue bg-clip-text text-transparent leading-none mb-2">10B+</div>
+          <h3 class="text-base font-semibold text-[#e8eaed] mb-2">日处理Token数</h3>
+          <p class="text-sm text-[#9ca3af]">每天处理超百亿级Token推理请求，承载海量业务并发</p>
+          <div class="tech-bar mt-5"><span data-width="88"></span></div>
+        </div>
+        <div class="text-center p-8 sm:p-10 bg-nova-card border border-white/[0.06] rounded-xl transition-all duration-350 cursor-default hover:-translate-y-1.5 hover:border-white/[0.12] hover:shadow-[0_4px_24px_rgba(0,0,0,0.3)] reveal reveal-delay-4">
+          <div class="text-4xl font-bold bg-gradient-to-r from-nova-cyan to-nova-blue bg-clip-text text-transparent leading-none mb-2">SOC2</div>
+          <h3 class="text-base font-semibold text-[#e8eaed] mb-2">安全合规认证</h3>
+          <p class="text-sm text-[#9ca3af]">通过国际权威安全审计认证，数据安全与隐私保护达到金融级标准</p>
+          <div class="tech-bar mt-5"><span data-width="95"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section id="contact" class="py-16 sm:py-24 bg-nova-dark">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-8">
+      <div class="text-center max-w-[680px] mx-auto mb-12 sm:mb-16 reveal">
+        <span class="inline-block text-xs font-semibold tracking-widest uppercase text-nova-cyan mb-4">合作咨询</span>
+        <h2 class="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold text-[#e8eaed] leading-tight tracking-tight mb-3">开启企业智能升级之旅</h2>
+        <p class="text-lg text-[#9ca3af]">填写下方表单，我们的解决方案专家将在24小时内与您联系，为您定制专属AI落地策略。</p>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+        <!-- Contact Info -->
+        <div class="reveal">
+          <p class="text-[0.95rem] text-[#9ca3af] leading-relaxed">无论您是正在探索AI落地的可能性，还是已有明确的应用场景，NovaMind技术团队都将为您提供专业的咨询与支持。欢迎通过以下方式与我们取得联系。</p>
+          <div class="flex flex-col gap-5 mt-8">
+            <div class="flex items-center gap-4 text-[#9ca3af]">
+              <div class="w-10 h-10 rounded-md bg-nova-cyan/10 flex items-center justify-center text-nova-cyan shrink-0">@</div>
+              <div><span class="block text-sm font-medium text-[#e8eaed]">业务合作邮箱</span><a href="mailto:wujiashuaiwu492@gmail.com" class="text-nova-cyan hover:underline text-sm">wujiashuaiwu492@gmail.com</a></div>
+            </div>
+            <div class="flex items-center gap-4 text-[#9ca3af]">
+              <div class="w-10 h-10 rounded-md bg-nova-cyan/10 flex items-center justify-center text-nova-cyan shrink-0">◉</div>
+              <div><span class="block text-sm font-medium text-[#e8eaed]">咨询热线</span><span class="text-sm">400-8820-NOVA</span></div>
+            </div>
+            <div class="flex items-center gap-4 text-[#9ca3af]">
+              <div class="w-10 h-10 rounded-md bg-nova-cyan/10 flex items-center justify-center text-nova-cyan shrink-0">⌂</div>
+              <div><span class="block text-sm font-medium text-[#e8eaed]">公司地址</span><span class="text-sm">上海市浦东新区张江人工智能岛</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- Form -->
+        <form id="contactForm" class="bg-nova-card border border-white/[0.06] rounded-xl p-6 sm:p-10 flex flex-col gap-5 reveal reveal-delay-2">
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="flex flex-col gap-1.5"><label class="text-sm font-medium text-[#9ca3af]">姓名 *</label><input type="text" placeholder="请输入姓名" required class="bg-nova-dark border border-white/[0.06] rounded-md px-4 py-3 text-sm text-[#e8eaed] outline-none transition-all duration-350 placeholder:text-[#6b7280] focus:border-nova-cyan focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)]" /></div>
+            <div class="flex flex-col gap-1.5"><label class="text-sm font-medium text-[#9ca3af]">职位 *</label><input type="text" placeholder="请输入职位" required class="bg-nova-dark border border-white/[0.06] rounded-md px-4 py-3 text-sm text-[#e8eaed] outline-none transition-all duration-350 placeholder:text-[#6b7280] focus:border-nova-cyan focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)]" /></div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="flex flex-col gap-1.5"><label class="text-sm font-medium text-[#9ca3af]">企业邮箱 *</label><input type="email" placeholder="you@company.com" required class="bg-nova-dark border border-white/[0.06] rounded-md px-4 py-3 text-sm text-[#e8eaed] outline-none transition-all duration-350 placeholder:text-[#6b7280] focus:border-nova-cyan focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)]" /></div>
+            <div class="flex flex-col gap-1.5"><label class="text-sm font-medium text-[#9ca3af]">公司名称 *</label><input type="text" placeholder="请输入公司名称" required class="bg-nova-dark border border-white/[0.06] rounded-md px-4 py-3 text-sm text-[#e8eaed] outline-none transition-all duration-350 placeholder:text-[#6b7280] focus:border-nova-cyan focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)]" /></div>
+          </div>
+          <div class="flex flex-col gap-1.5"><label class="text-sm font-medium text-[#9ca3af]">感兴趣的方向</label>
+            <select class="bg-nova-dark border border-white/[0.06] rounded-md px-4 py-3 text-sm text-[#e8eaed] outline-none transition-all duration-350 focus:border-nova-cyan focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)]">
+              <option value="">请选择</option><option>大模型私有化部署</option><option>智能风控解决方案</option><option>医疗影像AI诊断</option><option>工业视觉质检</option><option>供应链智能优化</option><option>其他行业方案</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1.5"><label class="text-sm font-medium text-[#9ca3af]">需求描述</label><textarea placeholder="请简要描述您的业务场景与需求……" class="bg-nova-dark border border-white/[0.06] rounded-md px-4 py-3 text-sm text-[#e8eaed] outline-none transition-all duration-350 placeholder:text-[#6b7280] focus:border-nova-cyan focus:shadow-[0_0_0_3px_rgba(0,212,170,0.15)] resize-vertical min-h-[100px]"></textarea></div>
+          <button type="submit" class="w-full inline-flex items-center justify-center gap-2 bg-nova-cyan text-nova-deep font-semibold px-8 py-3 rounded-md text-[0.95rem] transition-all duration-350 hover:bg-[#00e8bc] hover:shadow-[0_0_32px_rgba(0,212,170,0.15)]">提交咨询 →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="bg-nova-deep border-t border-white/[0.06] pt-16 pb-8">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-8">
+      <!-- Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
+        <!-- Brand -->
+        <div class="sm:col-span-2 lg:col-span-1">
+          <div class="text-xl font-bold text-[#e8eaed] mb-4">Nova<span class="text-nova-cyan">Mind</span></div>
+          <p class="text-sm text-[#6b7280] max-w-xs leading-relaxed mb-6">企业级人工智能解决方案提供商，致力于通过前沿AI技术赋能千行百业实现智能化升级。</p>
+          <div class="flex gap-3">
+            <a href="mailto:wujiashuaiwu492@gmail.com" class="w-9 h-9 rounded-md bg-nova-card border border-white/[0.06] flex items-center justify-center text-sm text-[#6b7280] transition-all duration-350 hover:bg-nova-cyan/10 hover:border-nova-cyan hover:text-nova-cyan">✉</a>
+            <a href="#" class="w-9 h-9 rounded-md bg-nova-card border border-white/[0.06] flex items-center justify-center text-sm text-[#6b7280] transition-all duration-350 hover:bg-nova-cyan/10 hover:border-nova-cyan hover:text-nova-cyan">in</a>
+            <a href="#" class="w-9 h-9 rounded-md bg-nova-card border border-white/[0.06] flex items-center justify-center text-sm text-[#6b7280] transition-all duration-350 hover:bg-nova-cyan/10 hover:border-nova-cyan hover:text-nova-cyan">𝕏</a>
+            <a href="#" class="w-9 h-9 rounded-md bg-nova-card border border-white/[0.06] flex items-center justify-center text-sm text-[#6b7280] transition-all duration-350 hover:bg-nova-cyan/10 hover:border-nova-cyan hover:text-nova-cyan">GH</a>
+          </div>
+        </div>
+        <!-- Product -->
+        <div>
+          <h4 class="text-sm font-semibold text-[#e8eaed] uppercase tracking-wider mb-5">产品</h4>
+          <div class="flex flex-col gap-2.5"><a href="#" class="text-sm text-[#6b7280] transition-all duration-350 hover:text-nova-cyan">数据融合引擎</a><a href="#" class="text-sm text-[#6b7280] transition-all duration-350 hover:text-nova-cyan">大模型推理平台</a><a href="#" class="text-sm text-[#6b7280] transition-all duration-350 hover:text-nova-cyan">知识图谱构建</a><a href="#" class="text-sm text-[#6b7280] transition-all duration-350 hover:text-nova-cyan">智能决策系统</a><a href="#" class="text-sm text-[#6b7280] transition-all duration-350 hover:text-nova-cyan">AI运维监控</a></div>
+        </div>
+        <!-- Industry -->
+        <div>
+          <h4 class="text-sm font-semibold text-[#e8eaed] uppercase tracking-wider mb-5">行业</h4>
+          <div class="flex flex-col gap-2.5"><a href="#" class="text-sm text-[#6b7280] transition-all duration-350 hover:text-nova-cyan">金融服务</a><a href="#" class="text-sm text-[#6b7280] transition-all duration-350 hover:text-nova-cyan">医疗健康</a><a href="#" class="text-sm text-[#6b7280] transition-all duration-350 hover:text-nova-cyan">智能制造</a><a href="#" class="text-sm text-[#6b7280] transition-all duration-350 hover:text-nova-cyan">零售供应链</a><a href="#" class="text-sm text-[#6b7280] transition-all duration-350 hover:text-nova-cyan">能源与公用</a></div>
+        </div>
+        <!-- About -->
+        <div>
+          <h4 class="text-sm font-semibold text-[#e8eaed] uppercase tracking-wider mb-5">关于</h4>
+          <div class="flex flex-col gap-2.5"><a href="#" class="text-sm text-[#6b7280] transition-all duration-350 hover:text-nova-cyan">公司简介</a><a href="#" class="text-sm text-[#6b7280] transition-all duration-350 hover:text-nova-cyan">技术团队</a><a href="#" class="text-sm text-[#6b7280] transition-all duration-350 hover:text-nova-cyan">加入我们</a><a href="mailto:wujiashuaiwu492@gmail.com" class="text-sm text-nova-cyan transition-all duration-350 hover:underline">联系合作</a><a href="#" class="text-sm text-[#6b7280] transition-all duration-350 hover:text-nova-cyan">隐私政策</a></div>
+        </div>
+      </div>
+      <!-- Bottom -->
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-3 pt-6 border-t border-white/[0.06] text-sm text-[#6b7280]">
+        <span>© 2026 NovaMind AI. All rights reserved.</span>
+        <span class="flex items-center gap-4">
+          <a href="mailto:wujiashuaiwu492@gmail.com" class="text-nova-cyan hover:underline">wujiashuaiwu492@gmail.com</a>
+          <span class="hidden sm:inline">|</span>
+          <span>沪ICP备2024XXXXXXXX号</span>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== Three.js ===== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+  (function(){
+    const canvas = document.getElementById('hero-canvas');
+    if(!canvas)return;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60,canvas.clientWidth/canvas.clientHeight,0.1,1000);
+    const renderer = new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+    renderer.setSize(canvas.clientWidth,canvas.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+
+    const nodes=[];
+    const N=120;
+    for(let i=0;i<N;i++){
+      const r=5+Math.random()*10,theta=Math.random()*Math.PI*2,phi=Math.acos(2*Math.random()-1);
+      nodes.push({x:r*Math.sin(phi)*Math.cos(theta),y:r*Math.sin(phi)*Math.sin(theta),z:r*Math.cos(phi),vx:(Math.random()-0.5)*0.003,vy:(Math.random()-0.5)*0.003,vz:(Math.random()-0.5)*0.003});
+    }
+    const pos=new Float32Array(N*3);
+    const nodeGeo=new THREE.BufferGeometry();nodeGeo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+    const nodeMat=new THREE.PointsMaterial({size:0.12,color:0x00d4aa,transparent:true,opacity:0.6,blending:THREE.AdditiveBlending,sizeAttenuation:true});
+    const nodeMesh=new THREE.Points(nodeGeo,nodeMat);scene.add(nodeMesh);
+    const edgeMat=new THREE.LineBasicMaterial({color:0x00d4aa,transparent:true,opacity:0.08,blending:THREE.AdditiveBlending});
+    let edgeMesh=new THREE.LineSegments(new THREE.BufferGeometry(),edgeMat);scene.add(edgeMesh);
+
+    function updateEdges(){
+      const pairs=[];const EPS=0.3;
+      for(let i=0;i<N;i++)for(let j=i+1;j<N;j++){const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y,dz=nodes[i].z-nodes[j].z,d=Math.sqrt(dx*dx+dy*dy+dz*dz);if(d<3+EPS)pairs.push([i,j]);}
+      const v=[];for(const[i,j]of pairs){v.push(nodes[i].x,nodes[i].y,nodes[i].z,nodes[j].x,nodes[j].y,nodes[j].z);}
+      if(!v.length){edgeMesh.visible=false;return}
+      edgeMesh.visible=true;
+      const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(v,3));edgeMesh.geometry.dispose();edgeMesh.geometry=g;
+    }
+    updateEdges();
+    camera.position.set(0,1,16);camera.lookAt(0,0,0);
+    let mx=0,my=0;
+    document.addEventListener('mousemove',e=>{mx=(e.clientX/window.innerWidth-0.5)*2;my=(e.clientY/window.innerHeight-0.5)*2;});
+    let t=0;
+    function animate(){
+      requestAnimationFrame(animate);t+=0.003;
+      for(const n of nodes){n.x+=n.vx;n.y+=n.vy;n.z+=n.vz;const r=Math.sqrt(n.x*n.x+n.y*n.y+n.z*n.z);if(r>12||r<4){n.vx*=-1;n.vy*=-1;n.vz*=-1}}
+      const p=nodeMesh.geometry.attributes.position.array;
+      for(let i=0;i<N;i++){p[i*3]=nodes[i].x;p[i*3+1]=nodes[i].y;p[i*3+2]=nodes[i].z;}
+      nodeMesh.geometry.attributes.position.needsUpdate=true;
+      updateEdges();
+      nodeMesh.rotation.y+=0.0006;nodeMesh.rotation.x=Math.sin(t*0.2)*0.05+my*0.03;nodeMesh.rotation.z=Math.cos(t*0.15)*0.03+mx*0.02;
+      renderer.render(scene,camera);
+    }
+    animate();
+    let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix();},200);});
+  })();
+
+  // ===== Carousel =====
+  (function(){
+    const track=document.getElementById('casesTrack'),dots=document.getElementById('carouselDots'),prev=document.getElementById('carouselPrev'),next=document.getElementById('carouselNext'),cards=track.querySelectorAll('.case-card');
+    let idx=0;
+    function getV(){return window.innerWidth<769?1:window.innerWidth<1025?2:3}
+    function total(){return Math.max(0,cards.length-getV())}
+    function render(){
+      const m=total();if(idx>m)idx=m;track.style.transform=`translateX(${-idx*(100/getV())}%)`;
+      dots.innerHTML='';for(let i=0;i<=m;i++){const s=document.createElement('span');if(i===idx)s.className='active';s.className+=' w-2 h-2 rounded-full bg-[#282d3a] cursor-pointer transition-all duration-350'+(i===idx?' !bg-nova-cyan !w-6 !rounded-sm':'');s.addEventListener('click',()=>{idx=i;render()});dots.appendChild(s);}
+    }
+    prev.addEventListener('click',()=>{idx=Math.max(0,idx-1);render()});
+    next.addEventListener('click',()=>{idx=Math.min(total(),idx+1);render()});
+    let auto=setInterval(()=>{idx=(idx>=total()?0:idx+1);render()},4000);
+    document.getElementById('casesCarousel').addEventListener('mouseenter',()=>clearInterval(auto));
+    document.getElementById('casesCarousel').addEventListener('mouseleave',()=>{auto=setInterval(()=>{idx=(idx>=total()?0:idx+1);render()},4000)});
+    window.addEventListener('resize',render);render();
+  })();
+
+  // ===== Scroll Reveal =====
+  (function(){
+    const els=document.querySelectorAll('.reveal');
+    const o=new IntersectionObserver(entries=>{for(const e of entries){if(e.isIntersecting){e.target.classList.add('visible');o.unobserve(e.target)}}},{threshold:0.1});
+    els.forEach(el=>o.observe(el));
+  })();
+
+  // ===== Counter Animation =====
+  (function(){
+    const els=document.querySelectorAll('.stat-num');
+    const o=new IntersectionObserver(entries=>{for(const e of entries){if(!e.isIntersecting)continue;const el=e.target;o.unobserve(el);const target=parseInt(el.dataset.target),hp=el.classList.contains('plus');let cur=0,step=Math.max(1,Math.floor(target/60)),ti=setInterval(()=>{cur+=step;if(cur>=target){cur=target;clearInterval(ti)}el.textContent=cur+(hp?'+':'')},25);}},{threshold:0.5});
+    els.forEach(el=>o.observe(el));
+  })();
+
+  // ===== Tech Bar =====
+  (function(){
+    const bars=document.querySelectorAll('.tech-bar span');
+    const o=new IntersectionObserver(entries=>{for(const e of entries){if(!e.isIntersecting)continue;const bar=e.target;o.unobserve(bar);setTimeout(()=>{bar.style.width=bar.dataset.width+'%'},200);}},{threshold:0.3});
+    bars.forEach(el=>o.observe(el));
+  })();
+
+  // ===== Navbar Scroll =====
+  (function(){
+    const nav=document.getElementById('navbar');
+    window.addEventListener('scroll',()=>{nav.classList.toggle('shadow-[0_1px_32px_rgba(0,0,0,0.4)]',window.scrollY>40);});
+  })();
+
+  // ===== Contact Form =====
+  (function(){
+    const form=document.getElementById('contactForm');
+    form.addEventListener('submit',e=>{
+      e.preventDefault();
+      const btn=form.querySelector('button[type="submit"]');const orig=btn.textContent;
+      btn.textContent='✓ 已提交，我们将尽快联系您';btn.style.background='#00b894';
+      setTimeout(()=>{btn.textContent=orig;btn.style.background=''},3000);
+    });
+  })();
+  </script>
+</body>
+</html>
